@@ -1,0 +1,34 @@
+## SSO Configuration ##
+
+oidc_providers:
+  - idp_id: keycloak
+    idp_name: Keycloak
+    issuer: "https://id.kilakubu.de/realms/kilakubu"
+    client_id: "matrix"
+    client_secret: "SLDr9HABPJxds9yURkrFxIyLBcsRxdOP"
+    scopes: ["openid", "profile", "email"]
+    user_mapping_provider:
+      config:
+        localpart_template: "{{ user.preferred_username }}"
+        display_name_template: "{{ user.name }}"
+        email_template: "{{ user.email }}"
+
+# Change Database to Postgresql
+database:
+  name: psycopg2
+  args:
+    user: matrix
+    password: your_secure_password
+    database: matrix
+    host: localhost
+    cp_min: 5
+    cp_max: 10
+
+## User Visibility ##
+
+user_directory:
+  enabled: true
+  search_all_users: true
+
+presence:
+  enabled: true
